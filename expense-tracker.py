@@ -2,6 +2,7 @@ import sys
 import json
 import os
 import argparse
+from datetime import datetime
 
 EXPENSES_FILE = 'expenses-tracker.json'
 
@@ -124,6 +125,9 @@ def main():
    
    # wait...i would need a month column for the commands here...
    
+   # imported datetime module
+   # have to somehow check if '2024-08-06' can be converted or sliced into 1-12 so the expenses can be summarized by specific month
+   # add date column in expenses 
 
 
 
