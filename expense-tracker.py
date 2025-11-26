@@ -1,7 +1,6 @@
 import sys
 import json
 import os
-from datetime import datetime
 import argparse
 
 EXPENSES_FILE = 'expenses-tracker.json'
@@ -53,6 +52,77 @@ def main():
    summary_parser.add_argument('--month', type=int,help='Summary of expenses per specific month. 1-12')
 
    args = parser.parse_args()
+   expenses = load_expenses()
+
+   if args.command == 'add':
+       print(f"Adding expense: {args.description} - ₱{args.amount}")
+       if expenses:
+           highest_id = 0
+           for expense in expenses:
+               if expense['id'] > highest_id:
+                   highest_id = expense['id']
+           new_id = highest_id + 1
+       else:
+           new_id = 1
+       
+
+       new_expense = {
+           'id': new_id,
+           'description': args.description,
+           'amount': args.amount
+       }
+
+       expenses.append(new_expense)
+       print(f"Expense added successfully. ID: {new_id}")
+
+       save_expenses(expenses)
+   elif args.command == 'delete':
+        expense_id = args.id
+
+        found_index = -1
+        for index, expense in enumerate(expenses):
+            if expense['id'] == expense_id:
+                found_index = index
+                break
+
+        if found_index == -1:
+            print(f"Error: Task with ID {expense_id} not found.")
+            return
+        
+        expenses.pop(found_index)
+        print(f"Expense {expense_id} deleted successfully.")
+
+        save_expenses(expenses)
+
+   elif args.command == 'update':
+       expense_id = args.id
+       expense_description = args.description
+       expense_amount = args.amount
+
+       found_index = -1
+       for index, expense in enumerate(expenses):
+           if expense['id'] == expense_id:
+               expense['description'] = expense_description
+               expense['amount'] = expense_amount
+               found_index = index
+               break
+           
+       if found_index == -1:
+           print(f"Error: Expense with ID {expense_id} is not found")
+           return
+       
+       print(f"Expense {expense_id} updated successfully.")
+       save_expenses(expenses)
+
+   elif args.command == 'list':
+        for expense in expenses:
+            print(f"ID: {expense['id']} | Description: {expense['description']} | Amount: ₱{expense['amount']}")
+
+        print(f"Total List: {len(expenses)} expense/s.")
+   elif args.command == 'summary':
+       pass
+   
+   # wait...i would need a month column for the commands here...
    
 
 
