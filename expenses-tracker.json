@@ -1,11 +1,5 @@
 [
     {
-        "id": 1,
-        "description": "Softdrinks",
-        "amount": 500.0,
-        "updatedAt": "2025-11-27T23:09:13.648066"
-    },
-    {
         "id": 2,
         "description": "Jollibee",
         "amount": 200.0,
@@ -28,5 +22,21 @@
         "date": "2026-01-02",
         "createdAt": "2025-11-27T11:37:03.053783",
         "updatedAt": "2025-11-27T11:37:03.053783"
+    },
+    {
+        "id": 5,
+        "description": "Keyboard",
+        "amount": 2000.0,
+        "date": "2025-11-27T23:14:12.479172",
+        "createdAt": "2025-11-27T23:14:12.479172",
+        "updatedAt": "2025-11-27T23:14:12.479172"
+    },
+    {
+        "id": 6,
+        "description": "Laptop",
+        "amount": 320000.0,
+        "date": "2027-05-25",
+        "createdAt": "2025-11-27T23:15:01.556131",
+        "updatedAt": "2025-11-27T23:15:01.556131"
     }
 ]

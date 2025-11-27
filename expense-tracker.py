@@ -134,7 +134,8 @@ def main():
 
    elif args.command == 'list':
         for expense in expenses:
-            print(f"ID: {expense['id']} | Description: {expense['description']} | Amount: ₱{expense['amount']} | Date: {expense['date']}")
+            date_str = expense['date'][:10]
+            print(f"ID: {expense['id']} | Description: {expense['description']} | Amount: ₱{expense['amount']} | Date: {date_str}")
 
         print(f"Total List: {len(expenses)} expense/s.")
 
@@ -143,7 +144,8 @@ def main():
        pass
    
 
-
+   # handle error of -- manually inputting date by user
+   
 
 
 
