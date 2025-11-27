@@ -134,7 +134,11 @@ def main():
             if args.amount is not None:
                 expense['amount'] = args.amount
             if args.date is not None:
-                expense['date'] = args.date
+                normalized_date = parse_date(args.date)
+                if not normalized_date:
+                    print("Error: Invalid date format. Use YYYY-MM-DD, or YYYYMMDD, or MM/DD/YYYY")
+                    return
+                expense['date'] = normalized_date
 
             expense['updatedAt'] = datetime.now().isoformat()
 
