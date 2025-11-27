@@ -1,7 +1,32 @@
 [
     {
         "id": 1,
-        "description": "Dinner",
-        "amount": 150.0
+        "description": "Softdrinks",
+        "amount": 500.0,
+        "updatedAt": "2025-11-27T23:09:13.648066"
+    },
+    {
+        "id": 2,
+        "description": "Jollibee",
+        "amount": 200.0,
+        "date": "2025-01-18",
+        "createdAt": "2025-11-27T11:22:38.043371",
+        "updatedAt": "2025-11-27T11:22:38.043371"
+    },
+    {
+        "id": 3,
+        "description": "Milk",
+        "amount": 113.0,
+        "date": "2025-11-27T11:38:48.825488",
+        "createdAt": "2025-11-27T11:35:57.437501",
+        "updatedAt": "2025-11-27T23:10:37.947876"
+    },
+    {
+        "id": 4,
+        "description": "Candy",
+        "amount": 5.0,
+        "date": "2026-01-02",
+        "createdAt": "2025-11-27T11:37:03.053783",
+        "updatedAt": "2025-11-27T11:37:03.053783"
     }
 ]

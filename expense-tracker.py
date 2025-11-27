@@ -1,4 +1,3 @@
-import sys
 import json
 import os
 import argparse
@@ -33,6 +32,7 @@ def main():
    add_parser = subparsers.add_parser('add', help='Add a new expense')
    add_parser.add_argument('--description', required=True, help='Expense description')
    add_parser.add_argument('--amount', type=float, required=True, help='Expense amount')
+   add_parser.add_argument('--date', help='Date expense occured (YYYY-MM-DD)')
 
    # delete command
    delete_parser = subparsers.add_parser('delete', help='Delete an expense')
@@ -43,6 +43,7 @@ def main():
    update_parser.add_argument('--id', type=int,required=True, help='Expense ID to update')
    update_parser.add_argument('--description', help='Description to be updated')
    update_parser.add_argument('--amount', type=float, help='Amount to be updated')
+   update_parser.add_argument('--date', help="Date the expense occurred.")
 
    # list command
    list_parser = subparsers.add_parser('list', help='List of expenses')
@@ -54,6 +55,8 @@ def main():
 
    args = parser.parse_args()
    expenses = load_expenses()
+   now = datetime.now().isoformat()
+
 
    if args.command == 'add':
        print(f"Adding expense: {args.description} - ₱{args.amount}")
@@ -66,11 +69,18 @@ def main():
        else:
            new_id = 1
        
-
+       if args.date:
+           expense_date = args.date
+       else:
+           expense_date = now
+       
        new_expense = {
            'id': new_id,
            'description': args.description,
-           'amount': args.amount
+           'amount': args.amount,
+           'date': expense_date,
+           'createdAt': now,
+           'updatedAt': now
        }
 
        expenses.append(new_expense)
@@ -97,16 +107,23 @@ def main():
 
    elif args.command == 'update':
        expense_id = args.id
-       expense_description = args.description
-       expense_amount = args.amount
 
        found_index = -1
        for index, expense in enumerate(expenses):
            if expense['id'] == expense_id:
-               expense['description'] = expense_description
-               expense['amount'] = expense_amount
-               found_index = index
-               break
+               
+            if args.description is not None:
+                expense['description'] = args.description
+            if args.amount is not None:
+                expense['amount'] = args.amount
+            if args.date is not None:
+                expense['date'] = args.date
+
+            expense['updatedAt'] = datetime.now().isoformat()
+
+            found_index = index
+            break
+               
            
        if found_index == -1:
            print(f"Error: Expense with ID {expense_id} is not found")
@@ -117,18 +134,14 @@ def main():
 
    elif args.command == 'list':
         for expense in expenses:
-            print(f"ID: {expense['id']} | Description: {expense['description']} | Amount: ₱{expense['amount']}")
+            print(f"ID: {expense['id']} | Description: {expense['description']} | Amount: ₱{expense['amount']} | Date: {expense['date']}")
 
         print(f"Total List: {len(expenses)} expense/s.")
+
+   # summary
    elif args.command == 'summary':
        pass
    
-   # wait...i would need a month column for the commands here...
-   
-   # imported datetime module
-   # have to somehow check if '2024-08-06' can be converted or sliced into 1-12 so the expenses can be summarized by specific month
-   # add date column in expenses 
-
 
 
 
