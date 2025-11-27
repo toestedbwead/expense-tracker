@@ -57,6 +57,19 @@ def main():
    expenses = load_expenses()
    now = datetime.now().isoformat()
 
+   # auto convert date (if manual input from user)
+
+   def parse_date(date_str):
+       try:
+           for fmt in ['%Y-%m-%d', '%Y%m%d', '%m/%d/%Y']:
+              try:
+               return datetime.strptime(date_str, fmt).strftime('%Y-%m-%d')
+              except ValueError:
+                  continue
+           return None
+       except:
+           return None
+
 
    if args.command == 'add':
        print(f"Adding expense: {args.description} - ₱{args.amount}")
@@ -70,9 +83,13 @@ def main():
            new_id = 1
        
        if args.date:
-           expense_date = args.date
+           normalized_date = parse_date(args.date)
+           if not normalized_date:
+               print("Error: Invalid date format. Use YYYY-MM-DD, YYYYMMDD, or MM/DD/YYYY")
+               return
+           expense_date = normalized_date
        else:
-           expense_date = now
+           expense_date = datetime.now().strftime('%Y-%m-%d')
        
        new_expense = {
            'id': new_id,
@@ -145,7 +162,7 @@ def main():
    
 
    # handle error of -- manually inputting date by user
-   
+
 
 
 
