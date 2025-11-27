@@ -1,36 +1,59 @@
-# Requirements
-1. Users can update an expense.
-2. Users can delete an expense.
-3. Users can view all expenses.
-4. Users can view a summary of all expenses.
-5. Users can view a summary of expenses for a specific month (of current year).
+# Expense Tracker CLI
 
-# Here are some additional features that you can add to the application:
-1. Add expense categories and allow users to filter expenses by category.
-2. Allow users to set a budget for each month and show a warning when the user exceeds the budget.
-3. Allow users to export expenses to a CSV file.
+A command-line expense tracker built with Python to manage personal finances. Track, update, and analyze your expenses with simple commands.
 
-The list of commands and their expected output is shown below:
+## Features
+
+- **Add expenses** with descriptions, amounts, and dates
+- **Update existing expenses** (modify description, amount, or date)
+- **Delete expenses** by ID
+- **List all expenses** with detailed view
+- **Expense summaries** - total or filtered by month
+- **Date validation** supports multiple formats (YYYY-MM-DD, YYYYMMDD, MM/DD/YYYY)
+- **Persistent storage** using JSON files
+- **Professional CLI** with argparse
+
+## Installation
+
+1. Clone or download this repository
+2. Ensure you have Python 3.6+ installed
+3. No external dependencies required!
+
+## Usage
+
+```bash
+# Add a new expense
+python expense_tracker.py add --description "Lunch" --amount 20 --date 2024-01-15
+
+# List all expenses
+python expense_tracker.py list
+
+# Update an expense
+python expense_tracker.py update --id 1 --amount 25 --description "Business Lunch"
+
+# Delete an expense
+python expense_tracker.py delete --id 2
+
+# View summary of all expenses
+python expense_tracker.py summary
+
+# View summary for specific month
+python expense_tracker.py summary --month 8
 ```
-$ expense-tracker add --description "Lunch" --amount 20
-# Expense added successfully (ID: 1)
-$ expense-tracker add --description "Dinner" --amount 10
-# Expense added successfully (ID: 2)
-$ expense-tracker list
-# ID  Date       Description  Amount
-# 1   2024-08-06  Lunch        $20
-# 2   2024-08-06  Dinner       $10
-$ expense-tracker summary
-# Total expenses: $30
-$ expense-tracker delete --id 2
-# Expense deleted successfully
-$ expense-tracker summary
-# Total expenses: $20
-$ expense-tracker summary --month 8
-# Total expenses for August: $20
+
+# Example Output
+```
+$ python expense_tracker.py list
+ID: 1 | Description: Lunch | Amount: ₱20 | Date: 2024-01-15
+ID: 2 | Description: Dinner | Amount: ₱30 | Date: 2024-01-15
+Total List: 2 expense/s.
+
+$ python expense_tracker.py summary
+Total expenses: ₱50
+
+$ python expense_tracker.py summary --month 1
+Total expenses for January: ₱50
 ```
 
-# project url: 
-https://roadmap.sh/projects/expense-tracker
-
+Based on project: https://roadmap.sh/projects/expense-tracker
 
