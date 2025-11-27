@@ -162,11 +162,26 @@ def main():
 
    # summary
    elif args.command == 'summary':
-       pass
-   
+       if args.month:
+           monthly_expenses = []
+           for expense in expenses:
+               expense_month = int(expense['date'][5:7])
+               if expense_month == args.month:
+                  monthly_expenses.append(expense)
 
-   # handle error of -- manually inputting date by user
+           total = sum(expense['amount'] for expense in monthly_expenses)
+           
+           month_names = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+            
+           print(f"Total expenses for {month_names[args.month-1]}: ₱{total}")
+       else:
+           for expense in expenses:
+            date_str = expense['date'][:10]
+            print(f"ID: {expense['id']} | Description: {expense['description']} | Amount: ₱{expense['amount']} | Date: {date_str}")
 
+           total = sum(expense['amount'] for expense in expenses)
+           print("")
+           print(f"Total expenses: ₱{total}")    
 
 
 
